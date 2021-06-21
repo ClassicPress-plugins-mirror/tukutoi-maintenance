@@ -168,7 +168,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function maybe_dequeue_styles_and_scripts() {
 
-		if( !is_user_logged_in() && !current_user_can('administrator') && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
 
   			global $wp_scripts;
   			global $wp_styles;
@@ -187,7 +187,7 @@ class Tkt_Maintenance_Public {
 	 */
     public function maybe_run_maintenance_mode(){
 
-    	if (  !is_user_logged_in() && !current_user_can('administrator') && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ) {
+    	if (  !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ) {
     		
     		$this->run_maintenance_mode();
     		
