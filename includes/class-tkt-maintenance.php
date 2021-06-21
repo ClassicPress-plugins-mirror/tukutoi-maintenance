@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The file that defines the core plugin class
+ * The file that defines the main plugin class
  *
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
@@ -14,7 +14,7 @@
  */
 
 /**
- * The core plugin class.
+ * The main plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
  * public-facing site hooks.
@@ -67,7 +67,7 @@ class Tkt_Maintenance {
 	protected $version;
 
 	/**
-	 * Define the core functionality of the plugin.
+	 * Define the main functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
@@ -111,7 +111,7 @@ class Tkt_Maintenance {
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
+		 * main plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tkt-maintenance-loader.php';
 
