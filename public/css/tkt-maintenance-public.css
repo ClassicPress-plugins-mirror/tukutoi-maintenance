@@ -12,8 +12,9 @@ body, html {
     background-size: cover;
     position: relative;
     color: white;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 25px;
+    font-family: "serif";
+    font-size: 150%;
+    text-shadow: 1px 1px #000000;
 }
 .topleft {
     position: absolute;
