@@ -504,7 +504,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function init_settings(){
 
-		if( is_admin() && current_user_can( 'administrator' ) )
+		if( is_admin() && ( current_user_can( 'manage_options' ) || current_user_can( 'manage_network_options' ) ) )
 			$this->register_settings();
 
 	}
