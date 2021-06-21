@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              https://www.tukutoi.com/
- * @since             1.0.0
+ * @since             1.0.10
  * @package           Tkt_Maintenance
  *
  * @wordpress-plugin
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  */
-define( 'TKT_MAINTENANCE_VERSION', '1.0.0' );
+define( 'TKT_MAINTENANCE_VERSION', '1.0.10' );
 
 /**
  * The core plugin class that is used to define internationalization,
