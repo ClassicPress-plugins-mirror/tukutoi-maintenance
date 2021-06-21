@@ -12,7 +12,7 @@ Enable and Control a Custom Maintenance Mode for your WordPress Website.
 
 == Description ==
 
-TukuToi Maintenance allows you to setup and control a Custom "Under Maintenance" or "Comins Soon" Screen for your WordPress Website.
+TukuToi Maintenance allows you to setup and control a Custom "Under Maintenance" or "Coming Soon" Screen for your WordPress Website.
 
 The Plugin is lightweight and has a Settings Screen allowing you to control all aspects of the Maintenance Screen from the WordPress backend.
 
@@ -24,14 +24,14 @@ This is useful to tell Crawling bots when to start re-crawling your website.
 
 1. Upload the Plugin files to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Setup and control the Settings in the native WordPress Settings > Maintenance Menu.
+1. Setup and control the Settings in the native WordPress Settings > Reading screen, under the newly added TukuToi Maintenance Section
 
 == Frequently Asked Questions ==
 
 = How big should the Image used for the Maintenance Screen be? =
 
-It should ideally be 1200px by 700px.
-
+The optimal (website) background image size is 1920 x 1080 pixels with a 16:9 ratio, the dpi (dots per inch) should be at least 72.
+However you are free to upload bigger or smaller sizes, as you wish.
 
 = How big should the Logo Image used for the Maintenance Screen be? =
 
