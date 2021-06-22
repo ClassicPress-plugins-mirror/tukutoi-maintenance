@@ -146,7 +146,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_styles() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
 
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tkt-maintenance-public.css', array(), $this->version, 'all' );
 
@@ -161,7 +161,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_scripts() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
 
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tkt-maintenance-public.js', array( 'jquery' ), $this->version, true );
 
@@ -184,7 +184,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function maybe_dequeue_styles_and_scripts() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
 
   			global $wp_scripts;
   			global $wp_styles;
