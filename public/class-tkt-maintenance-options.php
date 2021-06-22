@@ -58,8 +58,6 @@ class Tkt_Options {
 		$options = array(
 			$this->plugin_short . '_active'	=> get_option( $this->plugin_short . '_active', 0 ),
 			$this->plugin_short . '_dequeue_styles_scripts'	=> get_option( $this->plugin_short . '_dequeue_styles_scripts', 0 ),
-			$this->plugin_short . '_js' 	=> stripslashes( htmlspecialchars_decode( get_option( $this->plugin_short . '_js', '' ) ) ),
-			$this->plugin_short . '_css' 	=> stripslashes( htmlspecialchars_decode( get_option( $this->plugin_short . '_css', '' ) ) ),
 			$this->plugin_short . '_logo' 	=> esc_url( get_option( $this->plugin_short . '_logo', '' ) ),
 			$this->plugin_short . '_footer' => esc_html( get_option( $this->plugin_short . '_footer', '' ) ),
 			$this->plugin_short . '_header' => esc_html( get_option( $this->plugin_short . '_header', '' ) ),

@@ -146,7 +146,11 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tkt-maintenance-public.css', array(), $this->version, 'all' );
+		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
+
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tkt-maintenance-public.css', array(), $this->version, 'all' );
+
+		}
 
 	}
 
@@ -157,7 +161,19 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tkt-maintenance-public.js', array( 'jquery' ), $this->version, true );
+		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 ){
+
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tkt-maintenance-public.js', array( 'jquery' ), $this->version, true );
+
+			if( $this->options->get_options()[ $this->plugin_short . '_time' ] != '' ){
+
+				$data = 'var time = \'' . $this->options->get_options()[ $this->plugin_short . '_time' ] . '\'';
+	            wp_add_inline_script( $this->plugin_name, $data, 'before' );
+
+	        }
+
+	    }
+		
 
 	}
 

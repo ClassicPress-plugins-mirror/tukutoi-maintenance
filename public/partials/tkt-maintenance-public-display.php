@@ -26,41 +26,38 @@ $options = $options->get_options();
 
     <head>
 
-        <title><?php bloginfo( 'name', 'display' ) ?></title>
-
         <?php wp_head();?>
 
         <style>
 
-            .bgimg {
+            /*There is no other way to load a Dynamic URL saved in WordPress Options into CSS*/
+            .tkt-maintenance-bgimg {
                 background-image: url( <?php echo $options[ $this->plugin_short . '_image' ] ?> );
             }
-
-            <?php echo $options[ $this->plugin_short . '_css'  ]; ?>
 
         </style>
 
     </head>
 
-    <body>
+    <body class="tkt-maintenance">
 
-        <div class="bgimg">
+        <div class="tkt-maintenance-bgimg">
 
-            <div class="topleft">
+            <div class="tkt-maintenance-topleft">
 
                 <img src="<?php echo $options[ $this->plugin_short . '_logo' ] ?>"/>
 
             </div>
 
-            <div class="middle">
+            <div class="tkt-maintenance-middle">
 
                 <h1><?php echo $options[ $this->plugin_short . '_header' ]; ?></h1>
-                <hr>
-                <p id="timer" style="font-size:30px"></p>
+                <hr class="tkt-maintenance">
+                <p id="tkt-maintenance-timer"></p>
 
             </div>
 
-            <div class="bottomleft">
+            <div class="tkt-maintenance-bottomleft">
 
                 <p><?php echo $options[ $this->plugin_short . '_footer' ]; ?></p>
 
@@ -70,15 +67,7 @@ $options = $options->get_options();
 
         <?php 
 
-            if( $options[ $this->plugin_short . '_time' ] != '' ){
-                ?><script type="text/javascript">var time = '<?php echo $options[ $this->plugin_short . '_time' ]; ?>'</script><?php
-            }
-
             wp_footer();
-
-            if( $options[ $this->plugin_short . '_js' ] != '' ){
-                echo $options[ $this->plugin_short . '_js' ];
-            }
 
         ?>
 

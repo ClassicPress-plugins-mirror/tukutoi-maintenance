@@ -108,24 +108,8 @@ class Tkt_Maintenance_Admin {
 
 	  	add_settings_field(
 		    $this->plugin_short . '_dequeue_styles_scripts',
-		    __( 'Activate maintenance mode', 'tkt-maintenance' ),
+		    __( 'Dequeue Styles and Scripts', 'tkt-maintenance' ),
 		    array( $this, 'dequeue_styles_scripts' ),
-		    $this->section,
-		    $this->settings
-	  	);
-
-	  	add_settings_field(
-		    $this->plugin_short . '_js',
-		    __( 'Add Custom JS', 'tkt-maintenance' ),
-		    array( $this, 'custom_js_cb' ),
-		    $this->section,
-		    $this->settings
-	  	);
-
-	  	add_settings_field(
-		    $this->plugin_short . '_css',
-		    __( 'Add Custom CSS', 'tkt-maintenance' ),
-		    array( $this, 'custom_css_cb' ),
 		    $this->section,
 		    $this->settings
 	  	);
@@ -325,6 +309,7 @@ class Tkt_Maintenance_Admin {
 	public function setting_section_cb() {
 
 		echo '<p>'. __( 'Configure and activate maintenance mode.', 'tkt-maintenance' ) .'</p>';
+		echo '<p><em>'. __( 'To add Custom CSS, use the ', 'tkt-maintenance') . '<a href="'. get_admin_url( null, 'customize.php' ) .'" target="_blank">' . __( 'Appearance Customize Screen', 'tkt-maintenance' ) . '</a>' . __( '. To add Custom JS, use ', 'tkt-maintenance' ) .'<a href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/" target="_blank">'. __( ' WordPress Enqueue Functions', 'tkt-maintenance' ) .'</a>.<em></p>';
 
 	}
 
@@ -335,7 +320,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function active_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. $this->plugin_short . '_active"><input name="'. $this->plugin_short . '_active" id="'. $this->plugin_short . '_active" type="checkbox" value="1" ' . checked( 1, get_option( $this->plugin_short . '_active' ), false ) . ' />'. __( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. esc_attr( $this->plugin_short ) . '_active"><input name="'. esc_attr( $this->plugin_short ) . '_active" id="'. esc_attr( $this->plugin_short ) . '_active" type="checkbox" value="1" ' . checked( 1, get_option( $this->plugin_short . '_active' ), false ) . ' />'. __( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
 
 	} 
 
@@ -346,29 +331,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function dequeue_styles_scripts() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. $this->plugin_short . '_dequeue_styles_scripts"><input name="'. $this->plugin_short . '_dequeue_styles_scripts" id="'. $this->plugin_short . '_dequeue_styles_scripts" type="checkbox" value="1" ' . checked( 1, get_option( $this->plugin_short . '_dequeue_styles_scripts' ), false ) . ' />'. __( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
-
-	} 
-
-	/**
-	 * Callback to add custom JS.
-	 *
-	 * @since    1.0.0
-	 */
-	public function custom_js_cb() {
-
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add Custom JS to add to the maintenance mode page', 'tkt-maintenance' ) .'</span></legend><textarea name="'. $this->plugin_short . '_js" id="'. $this->plugin_short . '_js" cols="40" rows="5">' . stripslashes( get_option( $this->plugin_short . '_js' ) ) . '</textarea><p class="description">'. __( 'Add Custom JS to add to the maintenance mode page', 'tkt-maintenance' ) .'</p></fieldset>';
-
-	} 
-
-	/**
-	 * Callback to add custom CSS.
-	 *
-	 * @since    1.0.0
-	 */
-	public function custom_css_cb() {
-
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add Custom CSS to add to the maintenance mode page ', 'tkt-maintenance' ) .'</span></legend><textarea name="'. $this->plugin_short . '_css" id="'. $this->plugin_short . '_css" cols="40" rows="5">' . stripslashes( get_option( $this->plugin_short . '_css' ) ) . '</textarea><p class="description">'. __( 'Add Custom CSS to add to the maintenance mode page', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts"><input name="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts" id="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts" type="checkbox" value="1" ' . checked( 1, get_option( $this->plugin_short . '_dequeue_styles_scripts' ), false ) . ' />'. __( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
 
 	}  
 
@@ -379,7 +342,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function logo_cb() {
 
-		echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Enter an URL or Upload an Image for the Logo', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_logo" id="'. $this->plugin_short . '_logo" type="text" size="36" value="' . esc_url_raw( get_option( $this->plugin_short . '_logo' ) ) . '" /><input id="'. $this->plugin_short . '_logo_button" class="button" type="button" value="Upload Image" /><p class="description">'. __( 'Enter an URL or Upload an Image for the Logo', 'tkt-maintenance' ) .'</p></fieldset>';
+		echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Enter an URL or Upload an Image for the Logo', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_logo" id="'. esc_attr( $this->plugin_short ) . '_logo" type="text" size="36" value="' . esc_url_raw( get_option( $this->plugin_short . '_logo' ) ) . '" /><input id="'. esc_attr( $this->plugin_short ) . '_logo_button" class="button" type="button" value="Upload Image" /><p class="description">'. __( 'Enter an URL or Upload an Image for the Logo', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	} 
 	
@@ -390,7 +353,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function footer_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add your own Footer Text', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_footer" id="'. $this->plugin_short . '_footer" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_footer' ) ) . '" /><p class="description">'. __( 'Add your own Footer Text', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add your own Footer Text', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_footer" id="'. esc_attr( $this->plugin_short ) . '_footer" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_footer' ) ) . '" /><p class="description">'. __( 'Add your own Footer Text', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	}
 
@@ -401,7 +364,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function header_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add your own Header Text', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_header" id="'. $this->plugin_short . '_header" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_header' ) ) . '" /><p class="description">'. __( 'Add your own Header Text', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add your own Header Text', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_header" id="'. esc_attr( $this->plugin_short ) . '_header" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_header' ) ) . '" /><p class="description">'. __( 'Add your own Header Text', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	} 
 
@@ -412,7 +375,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function http_header_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add a Custom HTTP Header Message', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_http_header" id="'. $this->plugin_short . '_http_header" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_http_header' ) ) . '" /><p class="description">'. __( 'Add a Custom HTTP Header Message', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add a Custom HTTP Header Message', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_http_header" id="'. esc_attr( $this->plugin_short ) . '_http_header" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_http_header' ) ) . '" /><p class="description">'. __( 'Add a Custom HTTP Header Message', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	} 
 
@@ -423,7 +386,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function http_status_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add a Custom HTTP Status', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_http_status" id="'. $this->plugin_short . '_http_status" type="text" value="' . get_option( $this->plugin_short . '_http_status' ) . '" /><p class="description">'. __( 'Add a Custom HTTP Status', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add a Custom HTTP Status', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_http_status" id="'. esc_attr( $this->plugin_short ) . '_http_status" type="text" value="' . get_option( $this->plugin_short . '_http_status' ) . '" /><p class="description">'. __( 'Add a Custom HTTP Status', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	} 
 
@@ -434,7 +397,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function retry_after_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add a Custom Timeout for Crawlers to Retry after X Seconds', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_retry_after" id="'. $this->plugin_short . '_retry_after" type="text" value="' . get_option( $this->plugin_short . '_retry_after' ) . '" /><p class="description">'. __( 'Add a Custom Timeout for Crawlers to Retry after X Seconds', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add a Custom Timeout for Crawlers to Retry after X Seconds', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_retry_after" id="'. esc_attr( $this->plugin_short ) . '_retry_after" type="text" value="' . get_option( $this->plugin_short . '_retry_after' ) . '" /><p class="description">'. __( 'Add a Custom Timeout for Crawlers to Retry after X Seconds', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	} 
 
@@ -445,7 +408,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function time_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add your own Countdown End Time', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_time" id="'. $this->plugin_short . '_time" type="text" value="' . sanitize_text_field ( get_option( $this->plugin_short . '_time' ) ) . '" /><p class="description">'. __( 'Add your own Countdown End Time. Any valid JS <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples"><code>Date()</code></a> format accepted.', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Add your own Countdown End Time', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_time" id="'. esc_attr( $this->plugin_short ) . '_time" type="text" value="' . sanitize_text_field ( get_option( $this->plugin_short . '_time' ) ) . '" /><p class="description">'. __( 'Add your own Countdown End Time. Any valid JS <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples"><code>Date()</code></a> format accepted.', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	}  
 
@@ -456,7 +419,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function image_cb() {
 
-		echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Enter an URL or Upload an Image for the Background', 'tkt-maintenance' ) .'</span></legend><input name="'. $this->plugin_short . '_image" id="'. $this->plugin_short . '_image" type="text" size="36" value="' . esc_url_raw( get_option( $this->plugin_short . '_image' ) ) . '" /><input id="'. $this->plugin_short . '_image_button" class="button" type="button" value="Upload Image" /><p class="description">'. __( 'Enter an URL or Upload an Image for the Background', 'tkt-maintenance' ) .'</p></fieldset>';
+		echo '<fieldset><legend class="screen-reader-text"><span>'. __( 'Enter an URL or Upload an Image for the Background', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_image" id="'. esc_attr( $this->plugin_short ) . '_image" type="text" size="36" value="' . esc_url_raw( get_option( $this->plugin_short . '_image' ) ) . '" /><input id="'. esc_attr( $this->plugin_short ) . '_image_button" class="button" type="button" value="Upload Image" /><p class="description">'. __( 'Enter an URL or Upload an Image for the Background', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	}
 
