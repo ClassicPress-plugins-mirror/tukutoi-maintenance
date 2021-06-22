@@ -56,14 +56,14 @@ class Tkt_Options {
 	private function set_options(){
 
 		$options = array(
-			$this->plugin_short . '_active'	=> get_option( $this->plugin_short . '_active', 0 ),
-			$this->plugin_short . '_dequeue_styles_scripts'	=> get_option( $this->plugin_short . '_dequeue_styles_scripts', 0 ),
+			$this->plugin_short . '_active'	=> (int) get_option( $this->plugin_short . '_active', 0 ),
+			$this->plugin_short . '_dequeue_styles_scripts'	=> (int) get_option( $this->plugin_short . '_dequeue_styles_scripts', 0 ),
 			$this->plugin_short . '_logo' 	=> esc_url( get_option( $this->plugin_short . '_logo', '' ) ),
 			$this->plugin_short . '_footer' => esc_html( get_option( $this->plugin_short . '_footer', '' ) ),
 			$this->plugin_short . '_header' => esc_html( get_option( $this->plugin_short . '_header', '' ) ),
 			$this->plugin_short . '_http_header' => esc_html( get_option( $this->plugin_short . '_http_header', '' ) ),
-			$this->plugin_short . '_http_status' => get_option( $this->plugin_short . '_http_status', '' ),
-			$this->plugin_short . '_retry_after' => get_option( $this->plugin_short . '_retry_after', '' ),
+			$this->plugin_short . '_http_status' => (int) get_option( $this->plugin_short . '_http_status', '' ),
+			$this->plugin_short . '_retry_after' => (int) get_option( $this->plugin_short . '_retry_after', '' ),
 			$this->plugin_short . '_time' 	=> esc_html( get_option( $this->plugin_short . '_time', '' ) ),
 			$this->plugin_short . '_image' 	=> esc_url( get_option( $this->plugin_short . '_image', '' ) ),
 		);
