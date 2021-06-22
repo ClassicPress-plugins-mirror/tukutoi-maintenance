@@ -2,11 +2,11 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-body, html {
+body.tkt-maintenance, html {
     height: 100%;
     margin: 0;
 }
-.bgimg {
+.tkt-maintenance-bgimg {
     height: 100%;
     background-position: center;
     background-size: cover;
@@ -16,28 +16,31 @@ body, html {
     font-size: 150%;
     text-shadow: 1px 1px #000000;
 }
-.topleft {
+.tkt-maintenance-topleft {
     position: absolute;
     top: 16px;
     left: 16px;
 }
-.topleft > img {
+.tkt-maintenance-topleft > img {
     height: 150px;
     width: auto;
 }
-.bottomleft {
+.tkt-maintenance-bottomleft {
     position: absolute;
     bottom: 0;
     left: 16px;
 }
-.middle {
+.tkt-maintenance-middle {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
-hr {
+hr.tkt-maintenance {
     margin: auto;
     width: 40%;
+}
+#tkt-maintenance-timer{
+    font-size: 110%;
 }

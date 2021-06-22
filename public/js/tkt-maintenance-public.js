@@ -52,13 +52,13 @@
 			    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 			    
 			    // Output the result in an element with id="timer"
-			    document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+			    document.getElementById("tkt-maintenance-timer").innerHTML = days + "d " + hours + "h "
 			    + minutes + "m " + seconds + "s ";
 			    
 			    // If the count down is over, write some text 
 			    if (distance < 0) {
 			      clearInterval(countdownfunction);
-			      document.getElementById("timer").innerHTML = "EXPIRED";
+			      document.getElementById("tkt-maintenance-timer").innerHTML = "EXPIRED";
 			    }
 			    
 		  	}, 1000);
@@ -66,4 +66,5 @@
 		}
 		
 	});
+	
 })( jQuery );
