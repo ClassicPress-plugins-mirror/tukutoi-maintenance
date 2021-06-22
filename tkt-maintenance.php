@@ -16,7 +16,7 @@
  * Plugin Name:       TukuToi Maintenance
  * Plugin URI:        https://www.tukutoi.com/program/tukutoi-maintenance
  * Description:       Enable and Control a Custom Maintenance Mode for your WordPress Website.
- * Version:           1.0.0
+ * Version:           2.0.0
  * Author:            TukuToi
  * Author URI:        https://www.tukutoi.com/
  * License:           GPL-2.0+
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  */
-define( 'TKT_MAINTENANCE_VERSION', '1.0.10' );
+define( 'TKT_MAINTENANCE_VERSION', '2.0.0' );
 
 /**
  * The core plugin class that is used to define internationalization,

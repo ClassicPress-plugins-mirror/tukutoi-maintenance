@@ -4,7 +4,7 @@ Donate link: https://www.tukutoi.com/
 Tags: maintenance, under development, coming soon
 Requires at least: 4.9
 Tested up to: 5.7
-Stable tag: 1.0.10
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,16 @@ You can take a look at the Plugin's Template in `tkt-maintenance/public/partials
 5. Plugin Settings on Install
 
 == Changelog ==
+
+= 2.0.0 =
+
+* Breaking change: Removed JS and CSS options. Previously saved CSS and JS won't work anymore.
+* BReaking change: Changed Classnames of HTML in plugin.
+* Using WP Enqueue functions instead of inline script.
+* Security: Escape all $variables that are echo'd.
+* Removed HTML Title tag as provided by WP already.
+* Removed inline style and added to CSS File instead.
+* Added viewport and charset langauge metatags, added language attributes to HTML tag
 
 = 1.0.10 =
 * Adjusted Readme Typos and Wordings
