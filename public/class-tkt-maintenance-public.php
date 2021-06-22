@@ -165,6 +165,7 @@ class Tkt_Maintenance_Public {
 
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tkt-maintenance-public.js', array( 'jquery' ), $this->version, true );
 
+			//@since 2.0.0
 			if( $this->options->get_options()[ $this->plugin_short . '_time' ] != '' ){
 
 				$data = 'var time = \'' . $this->options->get_options()[ $this->plugin_short . '_time' ] . '\'';
