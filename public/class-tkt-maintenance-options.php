@@ -53,7 +53,13 @@ class Tkt_Options {
 
 	}
 
-	private function set_options(){
+	/**
+	 * Get and Escape Option Values.
+	 *
+	 * @since 	1.0.0
+	 * @return 	array 	$options  	The Options of this plugin, escaped, ready to echo.
+	 */
+	public function get_options(){
 
 		$options = array(
 			$this->plugin_short . '_active'	=> (int) get_option( $this->plugin_short . '_active', 0 ),
@@ -69,12 +75,6 @@ class Tkt_Options {
 		);
 
 		return $options;
-
-    }
-
-    public function get_options(){
-
-    	return $this->set_options();
 
     }
 

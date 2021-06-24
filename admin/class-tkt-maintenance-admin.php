@@ -205,24 +205,6 @@ class Tkt_Maintenance_Admin {
 
 	    register_setting( 
 	    	$this->section, 
-	    	$this->plugin_short . '_js', 
-	    	array( 
-	    		'type' => 'string', 
-	    		'sanitize_callback' => 'esc_html' 
-	    	)
-	    );
-
-	    register_setting( 
-	    	$this->section, 
-	    	$this->plugin_short . '_css', 
-	    	array( 
-	    		'type' => 'string', 
-	    		'sanitize_callback' => 'esc_html'  
-	    	)
-	    );
-
-	    register_setting( 
-	    	$this->section, 
 	    	$this->plugin_short . '_logo', 
 	    	array( 
 	    		'type' => 'string', 
@@ -235,7 +217,7 @@ class Tkt_Maintenance_Admin {
 	    	$this->plugin_short . '_footer',
 	    	array( 
 	    		'type' => 'string', 
-	    		'sanitize_callback' => 'esc_html'
+	    		'sanitize_callback' => 'sanitize_text_field'
 	    	) 
 	    );
 
@@ -244,7 +226,7 @@ class Tkt_Maintenance_Admin {
 	    	$this->plugin_short . '_header',
 	    	array( 
 	    		'type' => 'string', 
-	    		'sanitize_callback' => 'esc_html' 
+	    		'sanitize_callback' => 'sanitize_text_field' 
 	    	) 
 	    );
 
@@ -253,7 +235,7 @@ class Tkt_Maintenance_Admin {
 	    	$this->plugin_short . '_http_header',
 	    	array( 
 	    		'type' => 'string', 
-	    		'sanitize_callback' => 'esc_html' 
+	    		'sanitize_callback' => 'sanitize_text_field' 
 	    	) 
 	    );
 
@@ -286,7 +268,7 @@ class Tkt_Maintenance_Admin {
 	    	$this->plugin_short . '_time',
 	    	array( 
 	    		'type' => 'string', 
-	    		'sanitize_callback' => 'esc_html'
+	    		'sanitize_callback' => 'sanitize_text_field'
 	    	)
 	    );
 
@@ -309,7 +291,7 @@ class Tkt_Maintenance_Admin {
 	public function setting_section_cb() {
 
 		echo '<p>'. esc_html__( 'Configure and activate maintenance mode.', 'tkt-maintenance' ) .'</p>';
-		echo '<p><em>'. esc_html__( 'To add Custom CSS, use the ', 'tkt-maintenance') . '<a href="'. get_admin_url( null, 'customize.php' ) .'" target="_blank">' . esc_html__( 'Appearance Customize Screen', 'tkt-maintenance' ) . '</a>' . __( '. To add Custom JS, use ', 'tkt-maintenance' ) .'<a href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/" target="_blank">'. esc_html__( ' WordPress Enqueue Functions', 'tkt-maintenance' ) .'</a>.<em></p>';
+		echo '<p><em>'. esc_html__( 'To add Custom CSS, use the ', 'tkt-maintenance') . '<a href="'. get_admin_url( null, 'customize.php' ) .'" target="_blank">' . esc_html__( 'Appearance Customize Screen', 'tkt-maintenance' ) . '</a>' . esc_html__( '. To add Custom JS, use ', 'tkt-maintenance' ) .'<a href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/" target="_blank">'. esc_html__( ' WordPress Enqueue Functions', 'tkt-maintenance' ) .'</a>.<em></p>';
 
 	}
 
@@ -320,7 +302,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function active_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. esc_html__( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. esc_attr( $this->plugin_short ) . '_active"><input name="'. esc_attr( $this->plugin_short ) . '_active" id="'. esc_attr( $this->plugin_short ) . '_active" type="checkbox" value="1" ' . checked( 1, get_option( $this->plugin_short . '_active' ), false ) . ' />'. esc_html__( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. esc_html__( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. esc_attr( $this->plugin_short ) . '_active"><input name="'. esc_attr( $this->plugin_short ) . '_active" id="'. esc_attr( $this->plugin_short ) . '_active" type="checkbox" value="1" ' . checked( 1, $this->validate_number( get_option( $this->plugin_short . '_active' ) ), false ) . ' />'. esc_html__( 'Check to activate maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
 
 	} 
 
@@ -331,7 +313,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function dequeue_styles_scripts() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. esc_html__( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts"><input name="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts" id="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts" type="checkbox" value="1" ' . checked( 1, get_option( $this->plugin_short . '_dequeue_styles_scripts' ), false ) . ' />'. esc_html__( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. esc_html__( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</span></legend><label for="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts"><input name="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts" id="'. esc_attr( $this->plugin_short ) . '_dequeue_styles_scripts" type="checkbox" value="1" ' . checked( 1, $this->validate_number( get_option( $this->plugin_short . '_dequeue_styles_scripts' ) ), false ) . ' />'. esc_html__( 'Check to dequeue all styles and scripts during maintenance mode', 'tkt-maintenance' ) .'</label></fieldset>';
 
 	}  
 
@@ -408,7 +390,7 @@ class Tkt_Maintenance_Admin {
 	 */
 	public function time_cb() {
 
-	  	echo '<fieldset><legend class="screen-reader-text"><span>'. esc_html__( 'Add your own Countdown End Time', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_time" id="'. esc_attr( $this->plugin_short ) . '_time" type="text" value="' . sanitize_text_field ( get_option( $this->plugin_short . '_time' ) ) . '" /><p class="description">'. esc_html__( 'Add your own Countdown End Time. Any valid JS ', 'tkt-maintenance' ) . '<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples"><code>Date()</code></a>'. esc_html__( 'format accepted.', 'tkt-maintenance' ) .'</p></fieldset>';
+	  	echo '<fieldset><legend class="screen-reader-text"><span>'. esc_html__( 'Add your own Countdown End Time', 'tkt-maintenance' ) .'</span></legend><input name="'. esc_attr( $this->plugin_short ) . '_time" id="'. esc_attr( $this->plugin_short ) . '_time" type="text" value="' . sanitize_text_field( get_option( $this->plugin_short . '_time' ) ) . '" /><p class="description">'. esc_html__( 'Add your own Countdown End Time. Any valid JS ', 'tkt-maintenance' ) . '<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples"><code>Date()</code></a>'. esc_html__( 'format accepted.', 'tkt-maintenance' ) .'</p></fieldset>';
 
 	}  
 
