@@ -15,12 +15,6 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
-<?php 
-//All options are escapted and defaulted already, see Tkt_Maintenance_Public::get_options()
-$options = new Tkt_Options( 'tkt-maintenance', 'tkt_mtn' ); 
-$options = $options->get_options();
-?>
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -34,7 +28,7 @@ $options = $options->get_options();
 
             /*There is no other way to load a Dynamic URL saved in WordPress Options into CSS*/
             .tkt-maintenance-bgimg {
-                background-image: url( <?php echo $options[ $this->plugin_short . '_image' ] ?> );
+                background-image: url( <?php echo esc_url( get_option( $this->plugin_short . '_image', '' ) ); ?> );
             }
 
         </style>
@@ -47,13 +41,13 @@ $options = $options->get_options();
 
             <div class="tkt-maintenance-topleft">
 
-                <img src="<?php echo $options[ $this->plugin_short . '_logo' ] ?>"/>
+                <img src="<?php echo esc_url( get_option( $this->plugin_short . '_logo', '' ) ); ?>"/>
 
             </div>
 
             <div class="tkt-maintenance-middle">
 
-                <h1><?php echo $options[ $this->plugin_short . '_header' ]; ?></h1>
+                <h1><?php echo esc_html( get_option( $this->plugin_short . '_header', '' ) ); ?></h1>
                 <hr class="tkt-maintenance">
                 <p id="tkt-maintenance-timer"></p>
 
@@ -61,7 +55,7 @@ $options = $options->get_options();
 
             <div class="tkt-maintenance-bottomleft">
 
-                <p><?php echo $options[ $this->plugin_short . '_footer' ]; ?></p>
+                <p><?php echo esc_html( get_option( $this->plugin_short . '_footer', '' ) ); ?></p>
 
             </div>
 

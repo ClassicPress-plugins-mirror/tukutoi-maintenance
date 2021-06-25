@@ -50,15 +50,6 @@ class Tkt_Maintenance_Public {
 	private $version;
 
 	/**
-	 * The Options of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      object    $options    The Plugin Options, santized and escaped.
-	 */
-	private $options;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -71,8 +62,6 @@ class Tkt_Maintenance_Public {
 		$this->plugin_name = $plugin_name;
 		$this->plugin_short = $plugin_short;
 		$this->version = $version;
-
-		$this->options = new Tkt_Options( $this->plugin_name, $this->plugin_short );
 
 	}
 
@@ -88,13 +77,13 @@ class Tkt_Maintenance_Public {
 	    if ( $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.1' ) {
 	        $protocol = 'HTTP/1.1';
 	    }
- 		
- 		$message = !empty( $this->options->get_options()[ $this->plugin_short . '_http_header' ] ) ? $this->options->get_options()[ $this->plugin_short . '_http_header' ] : '503 Service Unavailable';
- 		$status = !empty( $this->options->get_options()[ $this->plugin_short . '_http_status' ] ) ? $this->options->get_options()[ $this->plugin_short . '_http_status' ] : 503;
- 		$retry = !empty( $this->options->get_options()[ $this->plugin_short . '_retry_after' ] ) ? $this->options->get_options()[ $this->plugin_short . '_retry_after' ] : 3600;
 
-	    header( $protocol . ' ' . $message, true, $status );
-	    header( 'Retry-After: ' .  $retry );
+ 		$message = !empty( get_option( $this->plugin_short . '_http_header', '' ) ) ?  get_option( $this->plugin_short . '_http_header', '' ) : '503 Service Unavailable';
+ 		$status = !empty( get_option( $this->plugin_short . '_http_status', '' ) ) ? get_option( $this->plugin_short . '_http_status', '' ) : 503;
+ 		$retry = !empty( get_option( $this->plugin_short . '_retry_after', '' ) ) ? get_option( $this->plugin_short . '_retry_after', '' ) : 3600;
+
+	    header( $protocol . ' ' . esc_html( $message ), true, (int) $status );
+	    header( 'Retry-After: ' .  (int) $retry );
 
     }
     
@@ -146,7 +135,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_styles() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ){
 
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tkt-maintenance-public.css', array(), $this->version, 'all' );
 
@@ -161,14 +150,14 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_scripts() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ){
 
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tkt-maintenance-public.js', array( 'jquery' ), $this->version, true );
 
 			//@since 2.0.0
-			if( $this->options->get_options()[ $this->plugin_short . '_time' ] != '' ){
+			if( get_option( $this->plugin_short . '_time', '' ) != '' ){
 
-				$data = 'var time = \'' . $this->options->get_options()[ $this->plugin_short . '_time' ] . '\'';
+				$data = 'var time = \'' . esc_html( get_option( $this->plugin_short . '_time', '' ) ) . '\'';
 	            wp_add_inline_script( $this->plugin_name, $data, 'before' );
 
 	        }
@@ -185,7 +174,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function maybe_dequeue_styles_and_scripts() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
+		if( !is_user_logged_in() && !$this->is_wplogin() && (int) get_option( $this->plugin_short . '_dequeue_styles_scripts', 0 ) == 1 && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ){
 
   			global $wp_scripts;
   			global $wp_styles;
@@ -204,7 +193,7 @@ class Tkt_Maintenance_Public {
 	 */
     public function maybe_run_maintenance_mode(){
 
-    	if (  !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ) {
+    	if (  !is_user_logged_in() && !$this->is_wplogin() && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ) {
     		
     		$this->run_maintenance_mode();
     		

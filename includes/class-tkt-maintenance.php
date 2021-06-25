@@ -132,11 +132,6 @@ class Tkt_Maintenance {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tkt-maintenance-public.php';
 
-		/**
-		 * The class responsible to get and sanitize options.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tkt-maintenance-options.php';
-
 		$this->loader = new Tkt_Maintenance_Loader();
 
 	}
