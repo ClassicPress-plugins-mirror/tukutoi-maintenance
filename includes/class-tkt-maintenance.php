@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the main plugin class
  *
@@ -132,11 +131,6 @@ class Tkt_Maintenance {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tkt-maintenance-public.php';
 
-		/**
-		 * The class responsible to get and sanitize options.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tkt-maintenance-options.php';
-
 		$this->loader = new Tkt_Maintenance_Loader();
 
 	}
@@ -152,7 +146,7 @@ class Tkt_Maintenance {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Tkt_Maintenance_i18n();
+		$plugin_i18n = new Tkt_Maintenance_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -168,7 +162,7 @@ class Tkt_Maintenance {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Tkt_Maintenance_Admin( $this->get_plugin_name(), $this->get_plugin_shortname(), $this->get_version() );
-		
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings' );
 

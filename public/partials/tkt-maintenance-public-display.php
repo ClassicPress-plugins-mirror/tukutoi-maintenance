@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a public-facing view for the plugin
  *
@@ -11,68 +10,63 @@
  * @package    Tkt_Maintenance
  * @subpackage Tkt_Maintenance/public/partials
  */
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
-<?php 
-//All options are escapted and defaulted already, see Tkt_Maintenance_Public::get_options()
-$options = new Tkt_Options( 'tkt-maintenance', 'tkt_mtn' ); 
-$options = $options->get_options();
-?>
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
-    <head>
-        <meta charset="<?php bloginfo( 'charset' ); ?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <?php wp_head();?>
+	<head>
+		<meta charset="<?php bloginfo( 'charset' ); ?>">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<?php wp_head(); ?>
 
-        <style>
+		<style>
 
-            /*There is no other way to load a Dynamic URL saved in WordPress Options into CSS*/
-            .tkt-maintenance-bgimg {
-                background-image: url( <?php echo $options[ $this->plugin_short . '_image' ] ?> );
-            }
+			/*There is no other way to load a Dynamic URL saved in WordPress Options into CSS*/
+			.tkt-maintenance-bgimg {
+				background-image: url( <?php echo esc_url( get_option( $this->plugin_short . '_image', '' ) ); ?> );
+			}
 
-        </style>
+		</style>
 
-    </head>
+	</head>
 
-    <body class="tkt-maintenance">
+	<body class="tkt-maintenance">
 
-        <div class="tkt-maintenance-bgimg">
+		<div class="tkt-maintenance-bgimg">
 
-            <div class="tkt-maintenance-topleft">
+			<div class="tkt-maintenance-topleft">
 
-                <img src="<?php echo $options[ $this->plugin_short . '_logo' ] ?>"/>
+				<img src="<?php echo esc_url( get_option( $this->plugin_short . '_logo', '' ) ); ?>"/>
 
-            </div>
+			</div>
 
-            <div class="tkt-maintenance-middle">
+			<div class="tkt-maintenance-middle">
 
-                <h1><?php echo $options[ $this->plugin_short . '_header' ]; ?></h1>
-                <hr class="tkt-maintenance">
-                <p id="tkt-maintenance-timer"></p>
+				<h1><?php echo esc_html( get_option( $this->plugin_short . '_header', '' ) ); ?></h1>
+				<hr class="tkt-maintenance">
+				<p id="tkt-maintenance-timer"></p>
 
-            </div>
+			</div>
 
-            <div class="tkt-maintenance-bottomleft">
+			<div class="tkt-maintenance-bottomleft">
 
-                <p><?php echo $options[ $this->plugin_short . '_footer' ]; ?></p>
+				<p><?php echo esc_html( get_option( $this->plugin_short . '_footer', '' ) ); ?></p>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-        <?php 
+		<?php
 
-            wp_footer();
+			wp_footer();
 
-        ?>
+		?>
 
-    </body>
-    
+	</body>
+	
 </html>

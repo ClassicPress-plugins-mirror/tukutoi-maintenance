@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
@@ -50,29 +49,18 @@ class Tkt_Maintenance_Public {
 	private $version;
 
 	/**
-	 * The Options of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      object    $options    The Plugin Options, santized and escaped.
-	 */
-	private $options;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $plugin_short      The shortname of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param    string $plugin_name       The name of the plugin.
+	 * @param    string $plugin_short      The shortname of this plugin.
+	 * @param    string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $plugin_short, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->plugin_short = $plugin_short;
 		$this->version = $version;
-
-		$this->options = new Tkt_Options( $this->plugin_name, $this->plugin_short );
 
 	}
 
@@ -81,61 +69,61 @@ class Tkt_Maintenance_Public {
 	 *
 	 * @since    1.0.0
 	 */
-    private function set_headers(){
+	private function set_headers() {
 
-    	$protocol = 'HTTP/1.0';
- 
-	    if ( $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.1' ) {
-	        $protocol = 'HTTP/1.1';
-	    }
- 		
- 		$message = !empty( $this->options->get_options()[ $this->plugin_short . '_http_header' ] ) ? $this->options->get_options()[ $this->plugin_short . '_http_header' ] : '503 Service Unavailable';
- 		$status = !empty( $this->options->get_options()[ $this->plugin_short . '_http_status' ] ) ? $this->options->get_options()[ $this->plugin_short . '_http_status' ] : 503;
- 		$retry = !empty( $this->options->get_options()[ $this->plugin_short . '_retry_after' ] ) ? $this->options->get_options()[ $this->plugin_short . '_retry_after' ] : 3600;
+		$protocol = 'HTTP/1.0';
 
-	    header( $protocol . ' ' . $message, true, $status );
-	    header( 'Retry-After: ' .  $retry );
+		if ( isset( $_SERVER['SERVER_PROTOCOL'] ) && 'HTTP/1.1' === $_SERVER['SERVER_PROTOCOL'] ) {
+			$protocol = 'HTTP/1.1';
+		}
 
-    }
-    
+		$message = ! empty( get_option( $this->plugin_short . '_http_header', '' ) ) ? sanitize_text_field( get_option( $this->plugin_short . '_http_header', '' ) ) : '503 Service Unavailable';
+		$status = ! empty( get_option( $this->plugin_short . '_http_status', '' ) ) ? sanitize_text_field( get_option( $this->plugin_short . '_http_status', '' ) ) : 503;
+		$retry = ! empty( get_option( $this->plugin_short . '_retry_after', '' ) ) ? sanitize_text_field( get_option( $this->plugin_short . '_retry_after', '' ) ) : 3600;
+
+		header( $protocol . ' ' . esc_html( $message ), true, (int) $status );
+		header( 'Retry-After: ' . (int) $retry );
+
+	}
+
 	/**
 	 * Load the Maintenance template.
 	 *
 	 * @since    1.0.0
 	 */
-	private function load_template(){
+	private function load_template() {
 
-		$template_path = apply_filters( $this->plugin_short .'_template_path', plugin_dir_path( __FILE__ ) . 'partials/tkt-maintenance-public-display.php' );
+		$template_path = apply_filters( $this->plugin_short . '_template_path', plugin_dir_path( __FILE__ ) . 'partials/tkt-maintenance-public-display.php' );
 
-    	require_once( $template_path );
+		require_once( $template_path );
 
-    }
+	}
 
-    /**
+	/**
 	 * Render the Maintenance template.
 	 *
 	 * @since    1.0.0
 	 */
-    private function run_maintenance_mode(){
+	private function run_maintenance_mode() {
 
-    	$this->set_headers();
-	    $this->load_template();
-	    die();
+		$this->set_headers();
+		$this->load_template();
+		die();
 
-    }
+	}
 
-    /**
+	/**
 	 * Check if WP Login URL is called.
 	 *
 	 * @since    1.0.0
 	 */
-    private function is_wplogin(){
+	private function is_wplogin() {
 
-	   	if( stripos($_SERVER["SCRIPT_NAME"], strrchr( wp_login_url(), '/' ) ) !== false){
-	   		return true;
-	   	}
+		if ( isset( $_SERVER['SCRIPT_NAME'] ) && false !== stripos( sanitize_text_field( wp_unslash( $_SERVER['SCRIPT_NAME'] ) ), strrchr( wp_login_url(), '/' ) ) ) {
+			return true;
+		}
 
-	   	return false;
+		return false;
 
 	}
 
@@ -146,7 +134,7 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_styles() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
+		if ( ! is_user_logged_in() && ! $this->is_wplogin() && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ) {
 
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tkt-maintenance-public.css', array(), $this->version, 'all' );
 
@@ -161,20 +149,18 @@ class Tkt_Maintenance_Public {
 	 */
 	public function enqueue_scripts() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
+		if ( ! is_user_logged_in() && ! $this->is_wplogin() && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ) {
 
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tkt-maintenance-public.js', array( 'jquery' ), $this->version, true );
 
-			//@since 2.0.0
-			if( $this->options->get_options()[ $this->plugin_short . '_time' ] != '' ){
+			// @since 2.0.0
+			if ( get_option( $this->plugin_short . '_time', '' ) != '' ) {
 
-				$data = 'var time = \'' . $this->options->get_options()[ $this->plugin_short . '_time' ] . '\'';
-	            wp_add_inline_script( $this->plugin_name, $data, 'before' );
+				$data = 'var time = \'' . sanitize_text_field( get_option( $this->plugin_short . '_time', '' ) ) . '\'';
+				wp_add_inline_script( $this->plugin_name, $data, 'before' );
 
-	        }
-
-	    }
-		
+			}
+		}
 
 	}
 
@@ -185,15 +171,15 @@ class Tkt_Maintenance_Public {
 	 */
 	public function maybe_dequeue_styles_and_scripts() {
 
-		if( !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_dequeue_styles_scripts' ] == 1 && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ){
+		if ( ! is_user_logged_in() && ! $this->is_wplogin() && (int) get_option( $this->plugin_short . '_dequeue_styles_scripts', 0 ) == 1 && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ) {
 
-  			global $wp_scripts;
-  			global $wp_styles;
+			global $wp_scripts;
+			global $wp_styles;
 
-  			$wp_scripts->queue = array( $this->plugin_name );
-  			$wp_styles->queue = array( $this->plugin_name );
+			$wp_scripts->queue = array( $this->plugin_name );
+			$wp_styles->queue = array( $this->plugin_name );
 
-  		}
+		}
 
 	}
 
@@ -202,14 +188,14 @@ class Tkt_Maintenance_Public {
 	 *
 	 * @since    1.0.0
 	 */
-    public function maybe_run_maintenance_mode(){
+	public function maybe_run_maintenance_mode() {
 
-    	if (  !is_user_logged_in() && !$this->is_wplogin() && $this->options->get_options()[ $this->plugin_short . '_active' ] == 1 ) {
-    		
-    		$this->run_maintenance_mode();
-    		
-    	}
+		if ( ! is_user_logged_in() && ! $this->is_wplogin() && (int) get_option( $this->plugin_short . '_active', 0 ) == 1 ) {
 
-    }
+			$this->run_maintenance_mode();
+
+		}
+
+	}
 
 }
