@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage Tkt_Maintenance/includes
  * @author     bedas <hello@tukutoi.com>
  */
-class Tkt_Maintenance_i18n {
+class Tkt_Maintenance_I18n {
 
 
 	/**
