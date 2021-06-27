@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== TukuToi Maintenance ===
 Contributors: bedas
 Donate link: https://www.tukutoi.com/
 Tags: maintenance, under development, coming soon
