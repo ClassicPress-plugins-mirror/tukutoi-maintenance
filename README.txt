@@ -4,7 +4,7 @@ Donate link: https://www.tukutoi.com/
 Tags: maintenance, under development, coming soon
 Requires at least: 4.9
 Tested up to: 5.7
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,12 @@ You can take a look at the Plugin's Template in `tkt-maintenance/public/partials
 5. Plugin Settings on Install
 
 == Changelog ==
+
+= 2.0.4 =
+
+* [Fixed] Added Image Alt attribute
+* [Fixed] Added fallback Font
+
 
 = 2.0.3 =
 
