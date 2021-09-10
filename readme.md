@@ -1,16 +1,7 @@
-=== TukuToi Maintenance ===
-Contributors: bedas
-Donate link: https://www.tukutoi.com/
-Tags: maintenance, under development, coming soon
-Requires at least: 4.9
-Tested up to: 5.8.1
-Stable tag: 2.0.4
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# TukuToi Maintenance ![ClassicPress Plugin: Required CP Version](https://img.shields.io/badge/dynamic/json?color=%23057f99&label=classicpress&prefix=v&query=%24.data.minimum_cp_version&url=https%3A%2F%2Fdirectory.classicpress.net%2Fapi%2Fplugins%2Ftukutoi-maintenance) ![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/tkt-maintenance)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=TukuToi_tukutoi-maintenance&metric=bugs)](https://sonarcloud.io/dashboard?id=TukuToi_tukutoi-maintenance) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=TukuToi_tukutoi-maintenance&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=TukuToi_tukutoi-maintenance) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TukuToi_tukutoi-maintenance&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=TukuToi_tukutoi-maintenance) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=TukuToi_tukutoi-maintenance&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=TukuToi_tukutoi-maintenance) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=TukuToi_tukutoi-maintenance&metric=security_rating)](https://sonarcloud.io/dashboard?id=TukuToi_tukutoi-maintenance)
 
 Enable and Control a Custom Maintenance Mode for your WordPress Website.
-
-== Description ==
 
 TukuToi Maintenance allows you to setup and control a Custom "Under Maintenance" or "Coming Soon" Screen for your WordPress Website.
 
@@ -47,7 +38,7 @@ For Administrators, the Front End will not show the Maintenance Mode. It will co
 Of course! You can either use the Plugin settings to customize the template, or, you can also load your 100% custom PHP template, if you wish. To do so, just pass your Custom PHP template to the `tkt_mtn_template_path` filter which the plugin provides.
 
 Example (assuming you store the template in your Theme's `template-parts/post/` folder):
-<pre><code>
+```
 add_filter( 'tkt_mtn_template_path', 'load_my_own_template', 10, 1 );
 function load_my_own_template( $template_path ){
 
@@ -56,7 +47,7 @@ function load_my_own_template( $template_path ){
 	return $template_path;
 
 }
-</code></pre>
+```
 
 You can take a look at the Plugin's Template in `tkt-maintenance/public/partials/tkt-maintenance-public-display.php` file to get a kickstart for your own Template.
 
