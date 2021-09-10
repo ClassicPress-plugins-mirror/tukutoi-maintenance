@@ -1,3 +1,8 @@
+= 2.0.4 =
+
+* [Fixed] Added Image Alt attribute
+* [Fixed] Added fallback Font
+
 = 2.0.3 =
 
 * [Changed] Removed options class completly as obsolete.

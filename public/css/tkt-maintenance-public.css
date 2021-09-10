@@ -12,7 +12,7 @@ body.tkt-maintenance, html {
     background-size: cover;
     position: relative;
     color: white;
-    font-family: "serif";
+    font-family: "serif, sans-serif";
     font-size: 150%;
     text-shadow: 1px 1px #000000;
 }

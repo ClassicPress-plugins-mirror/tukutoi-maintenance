@@ -41,7 +41,7 @@
 
 			<div class="tkt-maintenance-topleft">
 
-				<img src="<?php echo esc_url( get_option( $this->plugin_short . '_logo', '' ) ); ?>"/>
+				<img src="<?php echo esc_url( get_option( $this->plugin_short . '_logo', '' ) ); ?>" alt="<?php echo esc_attr( bloginfo( 'name' ) ); ?>"/>
 
 			</div>
 
